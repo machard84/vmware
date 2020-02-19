@@ -12,14 +12,14 @@ def get_args():
 
 def main():
     args = get_args()
-
-    sess = requests.post("https://vcsa.chardma.org.uk/rest/com/vmware/cis/session",
-                         auth=(args.user, args.password),
+    sess_url = "https://%s/rest/com/vmware/cis/session" % (args.host)
+    sess = requests.post(sess_url,
+                         auth=(args.user, args.password), 
                          verify=False)
 
     session_id = sess.json()['value']
-
-    resp = requests.get("https://vcsa.chardma.org.uk/rest/vcenter/vm",
+    resp_url = "https://%s/rest/vcenter/vm" % (args.host)
+    resp = requests.get(resp_url,
                         verify=False,
                         headers={
                             "vmware-api-session-id": session_id}
