@@ -49,7 +49,6 @@ def main():
 
     str = "%s %s" % (args.command, args.name)
     print(str)
-    print(vm)
     if vm:
         if args.command == 'poweron':
             vm.PowerOn()
