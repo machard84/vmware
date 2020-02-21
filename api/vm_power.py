@@ -22,8 +22,7 @@ def get_args():
                             'reboot',
                             'shutdown',
                             'standby',
-                        ],
-                        )
+                        ])
     my_args = parser.parse_args()
     return args.prompt_for_password(my_args)
 
