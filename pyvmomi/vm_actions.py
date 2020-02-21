@@ -4,6 +4,7 @@ from pyVim.connect import SmartConnectNoSSL, SmartConnect, Disconnect
 from tools import cli
 from pyVmomi import vim
 
+
 def get_args():
     parser = cli.build_arg_parser()
     parser.add_argument('-j', '--uuid',
@@ -13,7 +14,7 @@ def get_args():
     parser.add_argument('-i', '--ip',
                         help='IP Addres sof the Virtual machine to power on')
     parser.add_argument('command',
-                        choices=['poweron', 'poweroff', 'template'])
+                        choices=['poweron', 'poweroff', 'template', 'virtualmachine', 'reset'])
     my_args = parser.parse_args()
     return cli.prompt_for_password(my_args)
 
@@ -56,9 +57,12 @@ def main():
             vm.ShutdownGuest()
         elif args.command == 'template':
             vm.MarkAsTemplate()
+        elif args.command == 'reset':
+            #vm.reset()
+            print(vim.VirtualMachine)
     else:
         raise SystemExit("Unable to locate VM")
 
 
 if __name__ == "__main__":
-   main()
+    main()
