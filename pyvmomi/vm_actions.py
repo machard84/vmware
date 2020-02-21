@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import atexit
 from pyVim.connect import SmartConnectNoSSL, SmartConnect, Disconnect
 from tools import cli
