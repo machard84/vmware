@@ -38,10 +38,6 @@ def build_arg_parser():
     parser.add_argument('-n', '--name',
                         help='DNS Name of the VirtualMachine to power on')
 
-    parser.add_argument('-l', '--list',
-                        action='store_true',
-                        help='find a vm')
-
     parser.add_argument('-D', '--debug',
                         action='store_true',
                         help='enable debugging output')
