@@ -21,7 +21,7 @@ def build_arg_parser():
                         help='Port to connect on')
 
     parser.add_argument('-n', '--name',
-                        help='DNS Name of the VirtualMachine to power on')
+                        help='Name of the VirtualMachine to power on')
 
     parser.add_argument('-p', '--password',
                         required=False,

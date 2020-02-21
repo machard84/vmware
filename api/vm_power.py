@@ -8,8 +8,6 @@ import inventory
 import payload
 import urllib3
 
-urllib3.disable_warnings()
-
 
 def get_args():
     parser = args.build_arg_parser()
@@ -29,6 +27,10 @@ def get_args():
 
 def main():
     args = get_args()
+
+    if args.disable_ssl_verification:
+        urllib3.disable_warnings()
+
     authenticated = auth.get(args)
     vm_id = inventory.get(args, authenticated)
 
@@ -42,6 +44,8 @@ def main():
 
     disconnect = auth.delete(args, authenticated)
 
+    if disconnect:
+        print(disconnect)
 
 if __name__ == "__main__":
     main()
