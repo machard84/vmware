@@ -20,8 +20,7 @@ def delete(args, authenticated):
     sess = requests.delete(sess_url, verify=False,
                            headers={
                                 "vmware-api-session-id": authenticated
-                           }
-                           )
+                           })
     if sess.text:
         parsed = json.loads(sess.text)
         print(json.dumps(parsed, indent=2, sort_keys=True))
