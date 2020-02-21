@@ -71,13 +71,13 @@ def main():
     vm_id = inventory()
     if args.power == 'standby' or args.power == 'reboot' or args.power == 'shutdown':
         url = "https://%s/rest/vcenter/vm/%s/guest/power?action=%s" % (args.host, vm_id, args.power)
-        print(url, authenticated)
-        post(url, authenticated)
+        post(authenticated, url)
 
     if args.power == 'start' or args.power == 'stop' or args.power == 'reset' or args.power == 'suspend':
         url = "https://%s/rest/vcenter/vm/%s/power/%s" % (args.host, vm_id, args.power)
-        print(url, authenticated)
-        post(url, authenticated)
+        post(authenticated, url)
+
+    print(url, authenticated)
 
 
 if __name__ == "__main__":
