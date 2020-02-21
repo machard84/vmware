@@ -12,26 +12,26 @@ def build_arg_parser():
 
     parser.add_argument('-D', '--debug',
                         action='store_true',
-                        help='enable debugging output')
+                        help='Enable debugging')
 
     parser.add_argument('-o', '--port',
                         type=int,
                         default=443,
                         action='store',
-                        help='Port to connect on')
+                        help='VCSA Port')
 
     parser.add_argument('-n', '--name',
-                        help='Name of the VirtualMachine to power on')
+                        help='VM Name')
 
     parser.add_argument('-p', '--password',
                         required=False,
                         action='store',
-                        help='Password to use when connecting to host')
+                        help='VCSA Password')
 
     parser.add_argument('-s', '--host',
                         required=True,
                         action='store',
-                        help='vSphere service to connect to')
+                        help='VCSA Host')
 
     parser.add_argument('-S', '--disable_ssl_verification',
                         required=False,
@@ -41,7 +41,7 @@ def build_arg_parser():
     parser.add_argument('-u', '--user',
                         required=True,
                         action='store',
-                        help='User name to use when connecting to host')
+                        help='VCSA User')
     return parser
 
 
