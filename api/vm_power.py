@@ -4,7 +4,9 @@ import auth
 import inventory
 import payload
 import urllib3
+
 urllib3.disable_warnings()
+
 
 def get_args():
     parser = args.build_arg_parser()

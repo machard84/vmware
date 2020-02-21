@@ -3,7 +3,7 @@
 import payload
 
 
-def get(args, authenticated):
+def get(args, authenticated, ):
     url = "https://%s/rest/vcenter/vm" % args.host
     vms = payload.get(authenticated, url)
     json_data = vms["value"]
