@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+__author__ = "Mark Chard | machard.1984@gmail.com"
+
 import argparse
 import getpass
 
