@@ -19,6 +19,9 @@ def get_args():
                             'shutdown',
                             'standby',
                         ])
+    parser.add_argument('-D', '--debug',
+                        action='store_true',
+                        help='enable debugging output')
     my_args = parser.parse_args()
     return cli.prompt_for_password(my_args)
 
@@ -77,7 +80,8 @@ def main():
         url = "https://%s/rest/vcenter/vm/%s/power/%s" % (args.host, vm_id, args.power)
         post(authenticated, url)
 
-    print(url, authenticated)
+    if args.debug:
+        print(url, authenticated, vm_id, args.name)
 
 
 if __name__ == "__main__":
