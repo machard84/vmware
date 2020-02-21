@@ -3,16 +3,15 @@
 import requests
 import json
 
+
 def get(authenticated, url):
     resp = requests.get(url,
                         verify=False,
                         headers={
                             "vmware-api-session-id": authenticated
                         })
-    if resp.text:
-        parsed = json.loads(resp.text)
-        print(json.dumps(parsed, indent=2, sort_keys=True))
-        return parsed
+    parsed = common(resp)
+    return parsed
 
 
 def post(authenticated, url):
@@ -21,19 +20,22 @@ def post(authenticated, url):
                          headers={
                              "vmware-api-session-id": authenticated
                          })
-    if resp.text:
-        parsed = json.loads(resp.text)
-        print(json.dumps(parsed, indent=2, sort_keys=True))
-        return parsed
+    parsed = common(resp)
+    return parsed
 
 
 def delete(authenticated, url):
     resp = requests.delete(url,
-                         verify=False,
-                         headers={
-                             "vmware-api-session-id": authenticated
-                         })
+                           verify=False,
+                           headers={
+                               "vmware-api-session-id": authenticated
+                           })
+    parsed = common(resp)
+    return parsed
+
+
+def common(resp):
     if resp.text:
-        parsed = json.loads(resp.text)
-        print(json.dumps(parsed, indent=2, sort_keys=True))
-        return parsed
+        data = json.loads(resp.text)
+        print(json.dumps(data, indent=2, sort_keys=True))
+        return data
