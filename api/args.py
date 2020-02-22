@@ -36,7 +36,7 @@ def build_arg_parser():
     parser.add_argument('-S', '--disable_ssl_verification',
                         required=False,
                         action='store_true',
-                        help='Disable ssl host certificate verification')
+                        help='Disable SSL cert check')
 
     parser.add_argument('-u', '--user',
                         required=True,
