@@ -4,7 +4,7 @@ __author__ = "Mark Chard | machard.1984@gmail.com"
 
 import requests
 import json
-
+import urllib3
 
 def get(authenticated, url):
     resp = requests.get(url,
@@ -16,12 +16,12 @@ def get(authenticated, url):
     return parsed
 
 
-def post(authenticated, url):
+def post(url, data, headers):
+    urllib3.disable_warnings()
     resp = requests.post(url,
                          verify=False,
-                         headers={
-                             "vmware-api-session-id": authenticated
-                         })
+                         headers = headers,
+                         data = data)
     parsed = common(resp)
     return parsed
 

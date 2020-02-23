@@ -7,7 +7,7 @@ import json
 
 
 def get(args):
-    sess_url = "https://%s/rest/com/vmware/cis/session" % args.host
+    sess_url = "https://%s/rest/com/vmware/cis/session" % args.vcenter
     sess = requests.post(sess_url,
                          auth=(args.user, args.password),
                          verify=False)
@@ -16,7 +16,7 @@ def get(args):
 
 
 def delete(args, authenticated):
-    sess_url = "https://%s/rest/com/vmware/cis/session" % args.host
+    sess_url = "https://%s/rest/com/vmware/cis/session" % args.vcenter
     sess = requests.delete(sess_url, verify=False,
                            headers={
                                 "vmware-api-session-id": authenticated
