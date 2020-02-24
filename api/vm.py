@@ -16,21 +16,3 @@ def id(args, authenticated):
 
 
 
-def find(args, authenticated):
-    url = "https://%s/rest/com/vmware/content/library/item?~action=find" % ( args.vcenter )
-    name = (args.vm_name)
-    headers = {
-        'spec':{
-            'content-type': 'application/json',
-            'vmware-api-session-id': authenticated
-        }
-    }
-    header_data = {
-            "name": name
-    }
-    header = json.dumps(headers)
-    data = json.dumps(header_data)
-    print(data)
-    resp = payload.post(url, data, header)
-    print(resp)
-    return resp

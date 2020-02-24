@@ -16,14 +16,15 @@ def get_args():
                             'info',
                         ])
     my_args = parser.parse_args()
+
+    if my_args.disable_ssl_verification:
+        urllib3.disable_warnings()
+
     return args.prompt_for_password(my_args)
 
 
 def main():
     args = get_args()
-
-    if args.disable_ssl_verification:
-        urllib3.disable_warnings()
 
     authenticated = auth.get(args)
 

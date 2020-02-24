@@ -4,7 +4,7 @@ __author__ = "Mark Chard | machard.1984@gmail.com"
 
 import esxi
 import datastore
-import vm
+import library
 import auth
 import urllib3
 import args
@@ -26,13 +26,27 @@ def main():
 
 
     if args.vm_name:
-        vm_id = vm.find(args, authenticated)
+        template_id = library.find(args, authenticated)
 
     if args.datastore:
         datastore_id = datastore.id(args, authenticated)
 
     if args.esxi_host:
         host_id = esxi.id(args, authenticated)
+
+    url = "POST https://%s/rest/com/vmware/vcenter/ovf/library-item/id:%s?~action=deploy" %(args.vcenter, template_id)
+    headers = {
+        'content-type': 'application/json'
+        'vmware-api-session-id': authenticated
+    }
+    header_data = {
+        "deployment_spec": {
+            "name": "test",
+            "ovf_library_item_id": template_id,
+        }
+    }
+    data = json.dumps(header_data)
+    resp = payload.post_data(url, data, headers)
 
     disconnect = auth.delete(args, authenticated)
 

@@ -3,8 +3,8 @@
 __author__ = "Mark Chard | machard.1984@gmail.com"
 
 import requests
-import json
 import urllib3
+import response
 
 def get(authenticated, url):
     resp = requests.get(url,
@@ -12,19 +12,29 @@ def get(authenticated, url):
                         headers={
                             "vmware-api-session-id": authenticated
                         })
-    parsed = common(resp)
-    return parsed
+    data = response.parse(resp)
+    return data
 
+def post_data(url, data, headers):
+    if 'headers' and 'data':
+        urllib3.disable_warnings()
+        resp = requests.post(url,
+                             verify=False,
+                             headers = headers,
+                             data = data)
+        data = response.parse(resp)
+    return data
 
-def post(url, data, headers):
-    urllib3.disable_warnings()
-    resp = requests.post(url,
-                         verify=False,
-                         headers = headers,
-                         data = data)
-    parsed = common(resp)
-    return parsed
-
+def post(authenticated, url):
+    if authenticated:
+        urllib3.disable_warnings()
+        resp = requests.post(url,
+                             verify=False,
+                             headers={
+                                 "vmware-api-session-id": authenticated
+                             })
+        data = response.parse(resp)
+    return data
 
 def delete(authenticated, url):
     resp = requests.delete(url,
@@ -32,12 +42,5 @@ def delete(authenticated, url):
                            headers={
                                "vmware-api-session-id": authenticated
                            })
-    parsed = common(resp)
-    return parsed
-
-
-def common(resp):
-    if resp.text:
-        data = json.loads(resp.text)
-        print(json.dumps(data, indent=2, sort_keys=True))
-        return data
+    data = response.parse(resp)
+    return data
