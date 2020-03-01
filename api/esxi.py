@@ -10,6 +10,6 @@ def id(args, authenticated):
     list = payload.get(authenticated, url)
     json_data = list["value"]
     for esxi in json_data:
-        if esxi.get("name") == args.esxi_host:
+        if args.esxi_host in esxi.get("name") :
             data = esxi.get("host")
             return data

@@ -8,7 +8,8 @@ import library
 import auth
 import urllib3
 import args
-
+import json
+import payload
 
 def get_args():
     parser = args.build_arg_parser()
@@ -34,10 +35,14 @@ def main():
     if args.esxi_host:
         host_id = esxi.id(args, authenticated)
 
+    print(template_id)
+    print(datastore_id)
+    print(host_id)
+
     url = "POST https://%s/rest/com/vmware/vcenter/ovf/library-item/id:%s?~action=deploy" %(args.vcenter, template_id)
     headers = {
-        'content-type': 'application/json'
-        'vmware-api-session-id': authenticated
+        'content-type': 'application/json',
+        'vmware-api-session-id': authenticated,
     }
     header_data = {
         "deployment_spec": {
